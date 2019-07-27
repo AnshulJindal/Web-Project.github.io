@@ -1,0 +1,239 @@
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <style type="text/css">
+    <%include partials/view%>
+    header
+    {
+      height: 80px;
+      background-color: white;
+      padding: 10px;
+    }
+    @media(max-width: 800px)
+    {
+      .mobile-responsive
+      {
+        display: none;
+      }
+    }
+    .lis
+    {
+			margin-top:5px;
+			margin-left:60px;
+			background-color: #D3D3D3;
+			height:150px;
+			width:88%;
+		}
+    .div1
+    {
+      position:absolute;
+      margin-top:20px;
+      margin-left:30px;
+			height:70px;
+			width:70px;
+			border-radius: 50px;
+		}
+		.imgss
+    {
+			width:100%;
+			height:100%;
+		}
+    .anchor
+    {
+      position: absolute;
+      margin-top: 50px;
+      margin-left:110px;
+      font-size: 30px;
+      cursor:pointer;
+    }
+    .buttonnn
+    {
+			float:right;
+			margin-right:30px;
+			margin-top:60px;
+		}
+  </style>
+</head>
+<body>
+  <%include partials/communityhead%>
+  <div id="page-content-wrapper" style="padding:0;margin-top:60px"> <!--Margin Top is new-->
+    <div class="container-fluid page-content-div" style="padding:0">
+      <div class="row">
+        <div class="col-lg-12 scoll-possible" style="padding:0">
+          <div class="community-header-top" style="height:50px;padding-top:6px;margin-left:115">
+            <div class="col-sm-12 community-sub-head">
+              <a class="btn community-head-btn active" href="/community">
+                <i class="fa fa-users"></i>
+              </a>
+              <a class="btn community-head-btn" style="margin-left:10px" href="/commcommsearchpage">
+                <i class="fa fa-search"></i>
+              </a>
+            </div>
+          </div>
+          <div class="container" style="padding:0">
+            <div class="col-sm-12">
+              <div class="panel panel-default allSidesSoft community-panel-main-div">
+                <div class="panel-heading community-panel-heading">
+                  <p style="color:blue;margin-top:6px;font-weight:bold">My Communities</p>
+                  <a href="/createcommunity" class="btn btn-info community-panel-btn" style="float:right;margin:-35px 5px 0 0">Create</a>
+                </div>
+              </div><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul id="listofcomms"></ul>
+</body>
+<script>
+<%include partials/viewscript%>
+var com=new XMLHttpRequest();
+com.addEventListener('load',function()
+{
+  var data=JSON.parse(com.responseText);
+  var listss=document.getElementById("listofcomms");
+  for(i=0;i<data.length;i++)
+  {
+    var li=document.createElement("li");
+		li.setAttribute("class","lis");
+    var div1=document.createElement("div");
+    div1.setAttribute("class","div1");
+    li.appendChild(div1);
+    var im=document.createElement("img");
+    im.setAttribute("src",data[i].commpath);
+    im.setAttribute("class","imgss");
+    div1.appendChild(im);
+    var anc=document.createElement("a");
+		anc.setAttribute("class","anchor");
+    anc.setAttribute("id","asd"+i+1)
+		li.appendChild(anc);
+		anc.innerHTML=data[i].commname;
+    var bt=document.createElement("button");
+		bt.setAttribute("class","buttonnn");
+		bt.setAttribute("id",i+1);
+		bt.innerHTML="settings"
+		li.appendChild(bt);
+    listss.appendChild(li);
+}
+for(let i=0;i<data.length;i++)
+{
+  let elem=document.getElementById(i+1);
+  elem.onclick=function()
+  {
+    var reqqq=new XMLHttpRequest();
+    reqqq.addEventListener('load',function()
+    {
+      window.location='/settings'
+    });
+    reqqq.open('POST','/setid');
+    reqqq.setRequestHeader('Content-Type','application/json');
+    reqqq.send(JSON.stringify({'id':data[i]._id}));
+  }
+}
+for(let i=0;i<data.length;i++)
+{
+  let elem=document.getElementById(("asd"+i+1));
+  elem.onclick=function()
+  {
+    var reqqq=new XMLHttpRequest();
+    reqqq.addEventListener('load',function()
+    {
+      window.location='/settings'
+    });
+    reqqq.open('POST','/setid');
+    reqqq.setRequestHeader('Content-Type','application/json');
+    reqqq.send(JSON.stringify({'id':data[i]._id}));
+  }
+}
+});
+com.open('GET','/getccomm');
+com.send();
+var comss=new XMLHttpRequest();
+comss.addEventListener('load',function()
+{
+  var data=JSON.parse(comss.responseText);
+  var listss=document.getElementById("listofcomms");
+  for(i=0;i<data.length;i++)
+  {
+    var li=document.createElement("li");
+		li.setAttribute("class","lis");
+    var div1=document.createElement("div");
+    div1.setAttribute("class","div1");
+    li.appendChild(div1);
+    var im=document.createElement("img");
+    im.setAttribute("src",data[i].commpath);
+    im.setAttribute("class","imgss");
+    div1.appendChild(im);
+    var anc=document.createElement("a");
+		anc.setAttribute("class","anchor");
+    anc.setAttribute("id","wsd"+i+1)
+		li.appendChild(anc);
+		anc.innerHTML=data[i].commname;
+    listss.appendChild(li);
+}
+
+});
+comss.open('GET','/getjoincomm');
+comss.send();
+var comsss=new XMLHttpRequest();
+comsss.addEventListener('load',function()
+{
+  var data=JSON.parse(comsss.responseText);
+  var listss=document.getElementById("listofcomms");
+  for(i=0;i<data.length;i++)
+  {
+    var li=document.createElement("li");
+		li.setAttribute("class","lis");
+    var div1=document.createElement("div");
+    div1.setAttribute("class","div1");
+    li.appendChild(div1);
+    var im=document.createElement("img");
+    im.setAttribute("src",data[i].commpath);
+    im.setAttribute("class","imgss");
+    div1.appendChild(im);
+    var anc=document.createElement("a");
+		anc.setAttribute("class","anchor");
+		anc.setAttribute("href","#");
+		li.appendChild(anc);
+		anc.innerHTML=data[i].commname;
+    var bt=document.createElement("button");
+		bt.setAttribute("class","buttonnn");
+		bt.setAttribute("id","cancel"+i+1);
+		bt.innerHTML="cancel"
+		li.appendChild(bt);
+    listss.appendChild(li);
+}
+for(let i=0;i<data.length;i++)
+{
+  let elem=document.getElementById("cancel"+i+1);
+  elem.onclick=function()
+  {
+    var reqqq=new XMLHttpRequest();
+    reqqq.addEventListener('load',function()
+    {
+      window.location.reload(true);
+    });
+    reqqq.open('POST','/cancelreq');
+    reqqq.setRequestHeader('Content-Type','application/json');
+    reqqq.send(JSON.stringify({'id':data[i]._id}));
+  }
+}
+});
+comsss.open('GET','/getrequestedcomm');
+comsss.send();
+</script>
+</html>

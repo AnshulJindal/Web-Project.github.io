@@ -1,0 +1,230 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <style>
+  <% include partials/view%>
+  header
+  {
+    height: 80px;
+    background-color: white;
+    padding: 10px;
+  }
+  @media(max-width: 800px)
+  {
+    .mobile-responsive
+    {
+      display: none;
+    }
+  }
+</style>
+</head>
+<body>
+        <% include partials/userhead%>
+<div id="page-content-wrapper" style="padding:0;margin-top:60px;margin-left:60px"> <!--Margin Top is new-->
+         <div class="container-fluid page-content-div" style="padding:0">
+            <div class="row">
+               <div class="col-lg-12 scoll-possible" style="padding:0">
+
+
+
+  <div class="community-header-top communityheader-profile-mobile" style="padding-top:6px;position:relative;">
+    <div class="container pc">
+
+
+            <button id="join1" class="btn btn-info community-panel-btn joinBtn" data-id="1" style="float:right"> Join <i class="fa fa-plus"></i></button>
+
+
+</div>
+    <center>
+        <div class="communityprofile-name-mobile" style="max-height:40px;">
+          <a href="#" style="color:white">
+
+          </a>
+        </div>
+    </center>
+
+    <center>
+
+    </center>
+
+</div>
+
+<div class="container community-profile-conatiner">
+<div class="col-sm-2 col-xs-12 center-mobile pc">
+<a href="#">
+  <img class="img-communityprofile-pic allSides" style="background:#fff;width: 70px;height:70px" id="compic">
+</a>
+</div>
+
+<div class="col-sm-8 communityprofile-name-pc communityprofile-system">
+  <a href="#" class="communityprofile-name-pc" id="comname">
+
+  </a>
+</div>
+
+
+</div>
+<center>
+    <hr style="border-top:2px solid #E6E6E6;width:85%;margin-top:0">
+</center>
+
+<style>
+  .child-reply-input{
+    display: none !important;
+  }
+</style>
+<div class="container" style="width:94% !important">
+
+    <div class="col-sm-3 col-xs-12">
+      <div class="panel panel-default allSidesSoft" style="border-radius:0">
+
+        <div class="panel-body" style="border:0;border-radius:0">
+
+              <div class="col-sm-12 col-xs-12 center-all">
+
+
+                        <button id="join2" class="btn btn-primary joinBtn" data-id="1"> Join <i class="fa fa-plus"></i></button>
+
+
+              </div>
+
+        </div>
+        <div class="panel-footer community-panel-sideBtn-link">
+
+            <p class="center-all" style="margin:0" id="members">
+              3 Members
+            </p>
+
+        </div>
+      </div>
+
+        <div class="panel panel-default allSidesSoft" style="border-radius:0">
+          <div class="panel-heading" style="border:0;border-radius:0">
+            Community Managers
+          </div>
+          <div class="panel-body" style="border:0;border-radius:0">
+            <div id="commuity-owner-detail">
+              <!--Owner Info-->
+            <div class="col-sm-12 col-md-12 col-lg-12 adminInfo">  <div class="col-sm-6 col-md-6 col-lg-4 col-xs-4 center-all">      <a href="#"><img class="adminPic allSides" id="ownerpic" style="position:absolute;left: 40px;height: 50px;width:50px"></a>  </div><div class="col-sm-6 col-md-6 col-lg-8 col-xs-8 adminContent" style="padding:0">  <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12" style="padding:0">    <span class="label label-success" style="margin-top:10px;float:right;">Owner</span>  </div>   <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12" style="padding:0;">     <a href="/viewprofile/5cf5254b0a79ed1439525a48" id="ownername" style="float:right"></a>   </div></div></div></div>
+            <div id="commuity-admins-detail">
+              <!--Admin Info-->
+            </div>
+          </div>
+        </div>
+    </div>
+    <style>
+      .full-description{
+        display:none;
+      }
+      .less-description-btn{
+        display: none;
+      }
+    </style>
+    <div class="col-sm-8 col-xs-12 separator-community-admin" style="padding:0 10px 10px 10px;">
+
+      <div class="panel panel-default allSidesSoft" style="border-radius:0">
+        <div class="panel-heading center-all" style="border:0;border-radius:0">
+          About Community
+        </div>
+        <div class="panel-body" style="border:0;border-radius:0">
+
+
+              <p class="short-description center-all" id="comdis">
+                8+461115648445645
+
+              </p>
+              <div class="full-description">
+                <p>8+461</p><p>1</p><p>15648445645</p>
+              </div>
+
+        </div>
+
+      </div>
+
+        <div class="col-sm-12" id="needGlobalInProfile" style="padding:0">
+            <!--Here global will come-->
+        </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+<script>
+    <% include partials/viewscript %>
+    var compic=document.getElementById("compic");
+    var comdis=document.getElementById("comdis");
+    var ownerpic=document.getElementById("ownerpic");
+    var comname=document.getElementById("comname");
+    var join1=document.getElementById("join1");
+    var join2=document.getElementById("join2");
+    var ownername=document.getElementById("ownername");
+    var members=document.getElementById("members");
+    let reqqq=new XMLHttpRequest();
+    reqqq.open('GET','/getparcommdet');
+    reqqq.onload=function()
+    {
+        var data=JSON.parse(reqqq.responseText);
+        if(data[0].commrule=="P")
+        {
+          join1.innerHTML="ASK TO JOIN";
+          join2.innerHTML="ASK TO JOIN";
+        }
+        else
+        {
+          join1.innerHTML="JOIN";
+          join2.innerHTML="JOIN";
+        }
+        compic.setAttribute("src",data[0].commpath);
+        comdis.innerHTML=data[0].commdescription;
+        comname.innerHTML=data[0].commname;
+        members.innerHTML=data[0].users.length+" Member";
+        let owner=new XMLHttpRequest();
+        owner.open('POST','/ownerinfo');
+        owner.onload=function()
+        {
+          var data1=JSON.parse(owner.responseText);
+          ownerpic.setAttribute("src",data1[0].path);
+          ownername.innerHTML=data1[0].name;
+        }
+        owner.setRequestHeader("Content-Type", "application/json");
+        owner.send(JSON.stringify({'email':data[0].commbuild}));
+        join1.onclick=function()
+        {
+            var aaaaaa=new XMLHttpRequest();
+            aaaaaa.addEventListener('load',function()
+            {
+              window.location="/usercommpage";
+            });
+            aaaaaa.open('POST','/joincomm');
+            aaaaaa.setRequestHeader('Content-Type','application/json');
+            aaaaaa.send(JSON.stringify({'id':data[0]._id,'rule':data[0].commrule}));
+        }
+        join2.onclick=function()
+        {
+            var aaaaaa=new XMLHttpRequest();
+            aaaaaa.addEventListener('load',function()
+            {
+              window.location="/usercommpage";
+            });
+            aaaaaa.open('POST','/joincomm');
+            aaaaaa.setRequestHeader('Content-Type','application/json');
+            aaaaaa.send(JSON.stringify({'id':data[0]._id,'rule':data[0].commrule}));
+        }
+    }
+    reqqq.send();
+</script>
+</html>

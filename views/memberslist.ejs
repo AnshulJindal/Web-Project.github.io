@@ -1,0 +1,119 @@
+<hmtl>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <style type="text/css">
+    <%include partials/view%>
+    header
+    {
+      height: 80px;
+      background-color: white;
+      padding: 10px
+    }
+    @media(max-width: 800px)
+    {
+      .mobile-responsive
+      {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <% include partials/communityhead %>
+  <div id="page-content-wrapper" style="padding:0;margin-top:60px;margin-left: 60px"> <!--Margin Top is new-->
+    <div class="container-fluid page-content-div" style="padding:0">
+      <div class="row">
+        <div class="col-lg-12 scoll-possible" style="padding:0">
+          <div class="community-header-top communityheader-profile-mobile" style="padding-top:6px;position:relative;">
+            <div class="container pc">
+            </div>
+            <center>
+              <div class="communityprofile-name-mobile" style="max-height:40px">
+                <a href="/community/communityprofile/5cf525b20a79ed1439525a49" style="color:white">anshulfhgh;qe</a>
+              </div>
+            </center>
+          </div>
+          <div class="container community-profile-conatiner">
+            <div class="col-sm-2 col-xs-12 center-mobile pc">
+              <a href="/community/communityprofile/5cf525b20a79ed1439525a49">
+                <img src="/Upload/CommunityProfile/1559569842856.jpg" class="img-communityprofile-pic allSides" style="background:#fff">
+              </a>
+            </div>
+            <div class="col-sm-8 communityprofile-name-pc communityprofile-system">
+              <a href="/community/communityprofile/5cf525b20a79ed1439525a49" class="communityprofile-name-pc">anshulfhgh;qe
+              </a>
+            </div>
+            <div class="col-sm-2 col-xs-12 center-mobile" style="padding-top:10px;float:right">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle commuity-profile-menu-btn" type="button" data-toggle="dropdown">
+                  <i class="fa fa-bars"></i>
+                </button>
+                <ul class="dropdown-menu custom-commuity-dropdown dropdown-menu-right" style="margin-top:40px">
+                  <li>
+                    <a href="/memberslist" class="community-profile-option-btn">Community Members</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <center>
+            <hr style="border-top:2px solid #E6E6E6;width:85%;margin-top:0">
+          </center>
+          <style>
+            .communitymembers-head-btn
+            {
+              font-size: 16px;
+              font-weight: bold;
+              cursor: pointer;
+              padding: 4px;
+              margin-top: 2px;
+            }
+            .active-link-btn
+            {
+              color:rgb(73, 73, 73) !important;
+            }
+          </style>
+          <div class="container">
+            <div style="margin-top:20px;margin-bottom:50px">
+              <div class="col-sm-3 col-md-3 col-xs-4 col-lg-2">
+                <a class="communitymembers-head-btn active-link-btn" onclick="AllAdminList()" id="admins-list-btn">Managers (1)</a>
+              </div>
+              <div class="col-sm-3 col-md-3 col-xs-4 col-lg-2">
+                <a class="communitymembers-head-btn" onclick="AllUsersList()" id="users-list-btn">Members (4)</a>
+              </div>
+              <div class="col-sm-12">
+                <div class="col-sm-12 col-xs-12 allcoms community-user-div OwnerDivMain" style="margin-top: 5px; display: inline;">
+                  <div class="col-sm-2 col-xs-5" style="padding:5px;">
+                    <a href="/viewprofile/5cf5254b0a79ed1439525a48">
+                      <img src="/Upload/Profile/default.png" class="community-member-pic">
+                    </a>
+                    <span class="label label-primary">Owner</span>
+                  </div>
+                  <div class="col-sm-9 col-xs-7 scrollable">
+                    <a class="comusername" href="/viewprofile/5cf5254b0a79ed1439525a48">789894651</a>
+                  </div>
+                </div>
+                <div id="comUsersList"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+ </div>
+</div> <!--Header-->
+</body>
+<script>
+<% include partials/viewscript %>
+</script>
+</html>

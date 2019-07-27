@@ -1,0 +1,158 @@
+<hmtl>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <style type="text/css">
+    <%include partials/view%>
+    header
+    {
+      height: 80px;
+      background-color: white;
+      padding: 10px;
+    }
+    @media(max-width: 800px)
+    {
+      .mobile-responsive
+      {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <% include partials/communityhead %>
+  <div id="page-content-wrapper" style="padding:0;margin-top:60px;margin-left: 60px"> <!--Margin Top is new-->
+    <div class="container-fluid page-content-div" style="padding:0">
+      <div class="row">
+        <div class="col-lg-12 scoll-possible" style="padding:0">
+          <div class="community-header-top communityheader-profile-mobile" style="padding-top:6px;position:relative;">
+            <div class="container pc">
+            </div>
+            <center>
+              <div class="communityprofile-name-mobile" style="max-height:40px">
+                <a href="/community/communityprofile/5cf2dfdf0a79ed143952598a" style="color:white" ></a>
+              </div>
+            </center>
+          </div>
+          <div class="container community-profile-conatiner">
+            <div class="col-sm-2 col-xs-12 center-mobile pc">
+              <a href="/community/communityprofile/5cf2dfdf0a79ed143952598a">
+                <img src="" class="img-communityprofile-pic allSides" style="background:#fff" id="comimg">
+              </a>
+            </div>
+            <div class="col-sm-8 communityprofile-name-pc communityprofile-system">
+              <a href="/community/communityprofile/5cf2dfdf0a79ed143952598a" class="communityprofile-name-pc" id="comname">sd</a>
+            </div>
+            <div class="col-sm-2 col-xs-12 center-mobile" style="padding-top:10px;float:right">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle commuity-profile-menu-btn" type="button" data-toggle="dropdown">
+                  <i class="fa fa-bars"></i>
+                </button>
+                <ul class="dropdown-menu custom-commuity-dropdown dropdown-menu-right" style="margin-top:40px">
+                  <li>
+                    <a href="/community/discussion/5cf2dfdf0a79ed143952598a" class="community-profile-option-btn">Discussions</a>
+                  </li>
+                  <li>
+                    <a href="/community/managecommunity/5cf2dfdf0a79ed143952598a" class="community-profile-option-btn">Manage Community</a>
+                  </li>
+                  <li>
+                    <a href="/community/communityprofile/5cf2dfdf0a79ed143952598a" class="community-profile-option-btn">Community Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/community/communitymembers/5cf2dfdf0a79ed143952598a" class="community-profile-option-btn">Community Members
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <center>
+            <hr style="border-top:2px solid #E6E6E6;width:85%;margin-top:0">
+          </center>
+          <div class="modal fade" id="popUpManageCommunityMessage" role="dialog" style="z-index:9999">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h4 class="modal-title" id="mailheader">Reject Message</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-horizontal"> <!-- form -->
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <center>
+                          <p id="fullNameMessagePop"></p>
+                        </center>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-12"><!--Body-->
+                        <textarea type="text" class="form-control" id="messageBoxPop" style="resize: none;height:200px" required=""></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-default" id="sendButtonPop" style="float:right">Send And Reject</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12" style="padding-bottom:5px;border-bottom:1px solid #c4c4c4">
+              <nonlink class="manageCommunity-head-btn" style="cursor: context-menu;">Manage Community</nonlink>
+              <a class="pc" href="/community/editcommunity/5cf2dfdf0a79ed143952598a" style="float:right;font-weight:600;margin-right:15px">Edit Community
+              </a>
+            </div>
+            <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12" style="padding:10px 0 0 0;">
+              <div class="col-sm-3 manageCommunity-commuity-div" style="padding:0">
+                <div class="panel-body allSidesSoft" style="background:#fff">
+                  <a class="manageCommunity-child-btn manageCommunity-btn-active" onclick="users()" id="UsersShowBtn"></a>
+                  <br>
+                  <a class="manageCommunity-child-btn" onclick="AllAdmins()" id="AdminsShowBtn">Managers (1)</a><br>
+                  <a class="manageCommunity-child-btn" onclick="Requests(0)" id="requestedUserShowBtn">Requests (1)
+                  </a><br>
+                </div><br>
+              </div>
+              <div class="col-sm-9">
+                <div id="comlist">
+                  <div class="col-sm-12 allcoms well well-sm" style="margin-top:5px;font-weight:bold" id="">
+                    <center>No any user</center>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </body>
+
+<script>
+    <% include partials/viewscript %>
+    var comimg=document.getElementById("comimg");
+    var comname=document.getElementById("comname");
+    var users=document.getElementById("UsersShowBtn");
+    var requests=document.getElementById("requestedUserShowBtn");
+    let reqqq=new XMLHttpRequest();
+    reqqq.open('GET','/getparcommdet');
+    reqqq.onload=function()
+    {
+        var data=JSON.parse(reqqq.responseText);
+        comimg.setAttribute("src",data[0].commpath);
+        comname.innerHTML=data[0].commname;
+        users.innerHTML="users ("+data[0].users.length+")";
+        requests.innerHTML="Requests ("+data[0].requested.length+")";
+    }
+    reqqq.send();
+</script>
+</hmtl>

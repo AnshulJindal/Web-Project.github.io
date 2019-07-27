@@ -1,0 +1,177 @@
+<html>
+<head>
+	<title>CQ</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<style type="text/css">
+	<%include partials/view %>
+  	header
+		{
+  		height: 80px;
+  		background-color: white;
+  		padding: 10px
+  	}
+  	@media(max-width: 800px)
+		{
+  		.mobile-responsive
+			{
+  			display: none;
+  		}
+  	}
+		.lis
+		{
+			margin-top:5px;
+			margin-left:90px;
+			background-color: #D3D3D3;
+			height:150px;
+			width:90%;
+		}
+		.div1
+		{
+			position:absolute;
+			margin-top:3px;
+			margin-left:30px;
+			height:70px;
+			width:70px;
+			border-radius: 50px;
+		}
+		.imgss
+		{
+			width:100%;
+			height:100%;
+		}
+		.p1
+		{
+			position:absolute;
+			margin-top:80px;
+			margin-left:10px;
+			width:1100px;
+			height:20px;
+		}
+		.anchor
+		{
+			position: absolute;
+			margin-top: 30px;
+			margin-left:110px;
+			font-size: 30px;
+			cursor: pointer;
+		}
+		.buttonnn
+		{
+			float:right;
+			margin-right:30px;
+			margin-top:60px;
+		}
+	</style>
+</head>
+<body>
+	<%include partials/communityhead%>
+	<div id="page-content-wrapper" style="padding:0;margin-top:60px"> <!--Margin Top is new-->
+		<div class="container-fluid page-content-div" style="padding:0">
+			<div class="row">
+				<div class="col-lg-12 scoll-possible" style="padding:0">
+					<div class="community-header-top" style="height:50px;padding-top:6px;margin-left:115px">
+						<div class="col-sm-4 community-sub-head">
+							<a class="btn community-head-btn" href="/community">
+								<i class="fa fa-users"></i>
+							</a>
+							<a class="btn community-head-btn active" style="margin-left:10px" href="/commcommsearchpage">
+								<i class="fa fa-search"></i>
+							</a>
+						</div>
+						<div class="col-sm-4 col-sm-push-4 pc" style="padding:0 50px 0 0">
+							<input class="form-control searchCommunityDiscover" type="text" placeholder="Search Community...">
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<br>
+						<div class="container">
+							<div class="search" id="search">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ul id="listofcomms"></ul>
+	</body>
+<script>
+var com=new XMLHttpRequest();
+com.addEventListener('load',function()
+{
+	var data=JSON.parse(com.responseText);
+	var listss=document.getElementById("listofcomms");
+	for(var i=0;i<data.length;i++)
+	{
+		var li=document.createElement("li");
+		li.setAttribute("class","lis");
+		var div1=document.createElement("div");
+		div1.setAttribute("class","div1");
+		var im=document.createElement("img");
+		im.setAttribute("src",data[i].commpath);
+		im.setAttribute("class","imgss")
+		div1.appendChild(im);
+		li.appendChild(div1);
+		var p1=document.createElement("p");
+		p1.setAttribute("class","p1");
+		li.appendChild(p1);
+		p1.innerHTML=data[i].commdescription;
+		var anc=document.createElement("a");
+		anc.setAttribute("class","anchor");
+		anc.setAttribute("id",("info"+i+1));
+		li.appendChild(anc);
+		anc.innerHTML=data[i].commname;
+		var bt=document.createElement("button");
+		bt.setAttribute("class","buttonnn");
+		bt.setAttribute("id",i+1);
+		if(data[i].commrule=="D")
+		bt.innerHTML="JOIN"
+		else
+		bt.innerHTML="ASK TO JOIN";
+		li.appendChild(bt);
+		listss.appendChild(li);
+	}
+	for(let i=0;i<data.length;i++)
+	{
+		let elem=document.getElementById(i+1);
+		elem.onclick=function()
+		{
+			var reqqq=new XMLHttpRequest();
+			reqqq.addEventListener('load',function()
+			{
+				window.location.reload(true);
+			});
+			reqqq.open('POST','/joincomm');
+			reqqq.setRequestHeader('Content-Type','application/json');
+			reqqq.send(JSON.stringify({'id':data[i]._id,'rule':data[i].commrule}));
+		}
+	}
+	for(let i=0;i<data.length;i++)
+	{
+		let elem=document.getElementById(("info"+i+1));
+		elem.onclick=function()
+		{
+			var reqqq=new XMLHttpRequest();
+			reqqq.addEventListener('load',function()
+			{
+				window.location='/commprofileinsearch'
+			});
+			reqqq.open('POST','/setid');
+			reqqq.setRequestHeader('Content-Type','application/json');
+			reqqq.send(JSON.stringify({'id':data[i]._id}));
+		}
+	}
+});
+com.open('GET','/getcomms')
+com.send();
+<%include partials/viewscript%>
+</script>
+</html>

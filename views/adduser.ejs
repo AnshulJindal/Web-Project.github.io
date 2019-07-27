@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>CQ</title>
+
+  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	<%include partials/view %>
+	</style>
+<body bgcolor="#e8ebef">
+<%include partials/head%>
+<br><br><br>
+  <center>
+  <div style=" background-color:white;width:550px;heigth:600px;box-shadow:0 10px 10px rgba(0,0,0,0.6)">
+
+
+          <h1 align="left">Add User</h1>
+
+                  <input type="text" required="" name="fullname" class="form-control" id="naam" placeholder="Name" autocomplete="off"
+				  style="font-size:20px;width:500px;border-radius:5px;"><br/>
+
+                      <br><br>
+
+                    <input type="email" required="" name="username" class="form-control" id="email"
+                           placeholder="Email" autocomplete="off" autocorrect="off"style="font-size:20px;width:500px;border-radius:5px;" ><br/>
+                <br><br>
+
+                    <input type="password" required="" name="password" class="form-control" id="password"
+                           placeholder="User Password" autocomplete="new-password" autocorrect="off"style="font-size:20px;width:500px;border-radius:5px;"><br/>
+
+
+             <br><br>
+                  <input type="text" required="" name="phone" class="form-control" maxlength="10" id="phoneno" placeholder="Phone" autocomplete="off"
+				  style="font-size:20px;width:500px;border-radius:5px;"><br/>
+              <br><br>
+
+                  <input type="text" required="" name="city" class="form-control" placeholder="City" autocomplete="false" id="city"
+				  style="font-size:20px;width:500px;border-radius:5px;"><br/>
+              <br><br>
+			  <input type="text" required=""  id="dob" placeholder="DOB" autocomplete="off"
+				  style="font-size:20px;width:500px;border-radius:5px;"><br/>
+               <br><br>
+			    <input type="text" required=""  id="gender" placeholder="Gender" autocomplete="off"
+				  style="font-size:20px;width:500px;border-radius:5px;"><br/>
+			  <br><br>
+
+                <label>Role:</label><br>
+
+                <select data-style="btn-info" name="roleoptions" id="role" class="form-control"style="font-size:20px;width:500px;border-radius:5px;">
+                    <optgroup label="Select User Role">
+                      <option value="user">User</option>
+                        <option value="commuity manager">Community Builder</option>
+                      <option value="admin">Admin</option>
+                    </optgroup>
+                </select>
+
+              <br><br><br>
+                  <input type="submit" value="Add User" id="btn" class="btn btn-success" style="background-color:green;color:white;height:40px">
+                  <input value="Cancel" class="btn btn-success" style="background-color:red;color:white;height:35px;width:70px;text-align:center">
+
+
+
+</center>
+</div>
+
+
+  </body>
+
+  <script>
+  var naam=document.getElementById("naam");
+  var email=document.getElementById("email");
+  var password=document.getElementById("password");
+  var phoneno=document.getElementById("phoneno");
+  var city=document.getElementById("city");
+  var gender=document.getElementById("gender");
+  var dob=document.getElementById("dob");
+  var role=document.getElementById("role");
+  var btn=document.getElementById("btn");
+
+  btn.onclick=function()
+  {
+
+	var a="to verify your acc";
+	var b="login with "+password.value;
+	console.log(a);
+	console.log(b);
+	  if(naam.value==""||email.value==""||password.value==""||phoneno.value==""||city.value==""||gender.value==""||dob.value==""||role.value=="")
+		  alert("Please enter the values");
+
+
+	  var req=new XMLHttpRequest();
+		req.addEventListener('load', function()
+      {
+
+	  });
+	  req.open("POST", "/add");
+	  req.setRequestHeader('Content-Type','application/json');
+
+      req.send(JSON.stringify({'email':email.value,'password':password.value,'name':naam.value,'phone':phoneno.value,'gender':gender.value,
+	  'role':role.value,'dob':dob.value,'city':city.value}));
+
+	  var req=new XMLHttpRequest();
+req.addEventListener('load',function()
+{
+});
+req.open("POST","/sendmails");
+ req.setRequestHeader('Content-Type','application/json');
+req.send(JSON.stringify({'email':email.value,'sub':a,'write':b}));
+
+
+  }
+
+
+
+
+
+
+
+  <%include partials/viewscript%>
+
+  </script>
+</html>

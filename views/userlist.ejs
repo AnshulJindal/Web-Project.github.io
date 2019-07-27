@@ -1,0 +1,334 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <style>
+  <%include partials/view %>
+  .update
+  {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  left:350px;
+  width:750px; /* Full width */
+  height: 900px; /* Full heigt */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: white /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.close
+{
+  position: absolute;
+  top:46px;
+  left:650px;
+  color: #000;
+  cursor: pointer;
+}
+.animate
+{
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+@-webkit-keyframes animatezoom
+{
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+@keyframes animatezoom
+{
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+.modal-content
+{
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+</style>
+</head>
+<body>
+  <%include partials/head%>
+  <br>
+  <div width="100%">
+  <div style="background-color:black; color:white;width:90px;height:30px;position:fixed;left:60px;border-radius:5px;marginTop:5px;">
+    <center>USER LIST</center>
+  </div>
+  <button  style="background-color:black; color:white;width:120px;height:30px;position:fixed;right:400px;border-radius:5px;marginTop:5px;border-radius:5px;" onclick="refresh()" >
+    <center>REFRESH </center>
+  </button>
+  <select data-style="btn-info" name="statusoptions" onchange="abc()" id="status" class="form-control" style="width:150px;color:white; height:30px;border-radius:5px;position:fixed;right:200px;background-color:black;">
+    <option value="All">All</option>
+    <option value="pending">pending</option>
+    <option value="confirmed">confirmed</option>
+  </optgroup>
+</select>
+<select data-style="btn-info" name="roleoptions" onchange="abc()" id="role" class="form-control"style="width:150px;color:white; height:30px;border-radius:5px;position:fixed;right:10px;background-color:black;">
+  <option  value="All">All</option>
+  <option value="user">User</option>
+  <option value="commuity manager">Community Builder</option>
+  <option value="admin">Admin</option>
+</optgroup>
+</select>
+  <br><br>
+</div>
+<div style="width:1300px;position:absolute;left:60px;">
+  <table id="example">
+    <thead>
+      <tr>
+        <th align="left">Username</th>
+        <th align="left">Phone</th>
+        <th align="left">City</th>
+        <th align="left">Status</th>
+        <th align="left">Role</th>
+        <th align="left">Actions</th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div id="update" class="update">
+  <form class="modal-content animate">
+    <span onclick="document.getElementById('update').style.display='none'" class="close" >&times;</span>
+    <div class="container">
+      <center>
+        <label><b>UPDATE</b></label>
+        <br><br>
+        <label>NAME </label>
+        <input id="uname" style="width:400px;height:30px;border-radius:5px;">
+        <br><br>
+        <label>Phone </label>
+        <input id="uphone" style="width:400px;height:30px;border-radius:5px;">
+        <br><br>
+        <label>City</label>
+        <input id="ucity" style="width:400px;height:30px;border-radius:5px;">
+        <br><br>
+        <label>Status</label>
+        <input id="ustatus" style="width:400px;height:30px;border-radius:5px;">
+        <br><br>
+        <label>Role:</label><br>
+        <select data-style="btn-info" name="roleoptions" id="urole" class="form-control"style="font-size:20px;width:500px;border-radius:5px;">
+          <optgroup label="Select User Role">
+            <option value="user">User</option>
+            <option value="commuity manager">Community Builder</option>
+            <option value="admin">Admin</option>
+          </optgroup>
+        </select>
+        <br><br>
+        <button  id="uclick" style="background-color:red;width:100px;height:50px;">Update</button>
+        <br><br>
+      </center>
+    </div>
+  </form>
+</div>
+<div id="delete" class="update">
+  <form class="modal-content animate">
+    <span onclick="document.getElementById('delete').style.display='none'" class="close" >&times;</span>
+    <div class="container">
+      <center>
+        <label style="font-size:40px"; id="what">Are You Sure You Want to Delete</label>
+        <br><br><br><br><br><br>
+        <button  id="dyclick" style="background-color:green;width:100px;height:50px;">YES</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button  id="dnclick" style="background-color:red;width:100px;height:50px;">NO</button>
+        <br><br>
+      </center>
+    </div>
+  </form>
+</div>
+<div id="mail" class="update">
+  <form class="modal-content animate">
+    <span onclick="document.getElementById('mail').style.display='none'" class="close" >&times;</span>
+    <div class="container">
+      <label style="position:absolute;top:46px;align:left;">Send Reminder Mail</label>
+      <br>
+      <hr>
+      <div style="height:400px;">
+        <center>
+          <p style="margin-left:33px">To: <input type="email" name="username" class="emailid" style="background-color:#eee;" id="personemail" readonly=""/> </p>
+          <p>Subject: <input type="text"/ id="subject"></p>
+          <div type="text"style="width:100%;height:200px;" id="infomail"></div>
+          <br><br>
+          <button id="sendmail" style="background-color:green;">SEND</button>
+        </center>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.js"> </script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+<script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+
+<script>
+var editor = new Quill('#infomail', {
+
+theme: 'snow'
+
+});
+var role=document.getElementById("role");
+var status=document.getElementById("status");
+print("All","All");
+/*****update function****/
+function update(tr)
+{
+  var b=document.getElementById("uclick");
+  var name=document.getElementById("uname");
+  var phone=document.getElementById("uphone");
+  var city=document.getElementById("ucity");
+  var status=document.getElementById("ustatus");
+  var role=document.getElementById("urole");
+  var arr=tr.childNodes;
+  name.value=arr[0].innerHTML;
+  phone.value=arr[1].innerHTML;
+  city.value=arr[2].innerHTML;
+  status.value=arr[3].innerHTML;
+  role.value=arr[4].innerHTML;
+  document.getElementById('update').style.display='block';
+  b.onclick=function()
+  {
+    var req=new XMLHttpRequest();
+		req.addEventListener('load', function()
+    {});
+    req.open("POST", "/update");
+	  req.setRequestHeader('Content-Type','application/json');
+    req.send(JSON.stringify({'old':arr[0].innerHTML,'email':name.value,'phone':phone.value,'role':role.value,'status':status.value,'city':city.value}));
+	}
+}
+/******activate or deactivate function*****/
+function dele(tr)
+{
+  var p=document.getElementById("what");
+  if(tr.flag=="0")
+  {
+      p.innerHTML="Are you really want to activate "+tr.email;
+  }
+  else if(tr.flag=="1")
+  {
+      p.innerHTML="Are you really want to deactivate "+tr.email;
+  }
+  document.getElementById('delete').style.display='block';
+  var dyclick=document.getElementById("dyclick");
+  dyclick.onclick=function()
+  {
+    var req=new XMLHttpRequest();
+    req.addEventListener('load',function()
+    {
+      refresh();
+    });
+    req.open("POST","/toggle");
+    req.setRequestHeader('Content-Type','application/json');
+    req.send(JSON.stringify({'username':tr.email,'sf':tr.flag}));
+  }
+}
+/*******send mail function*******/
+function sendmail(tr)
+{
+  document.getElementById('mail').style.display='block';
+  var arr=tr.childNodes;
+  var personemail=document.getElementById("personemail");
+  var subject=document.getElementById("subject");
+  var sendmail=document.getElementById("sendmail");
+  var infomail=document.getElementById("infomail");
+  console.log(arr[0].innerHTML);
+  console.log(personemail);
+  personemail.value=arr[0].innerHTML;
+  sendmail.onclick=function()
+  {
+    var req=new XMLHttpRequest();
+    req.addEventListener('load',function()
+    {});
+    req.open("POST","/sendmail");
+    req.setRequestHeader('Content-Type','application/json');
+    req.send(JSON.stringify({'email':arr[0].innerHTML,'sub':subject.value,'write':editor.container.firstChild.innerHTML}));
+  }
+}
+var len=0;
+/******create table or print function*****/
+function print(role,status)
+{
+  var table= $(document).ready(function()
+  {
+    var count=0;
+    var data;
+    $('#example').DataTable(
+      {
+        "processing": true,
+        "serverSide": true,
+        "paging":true,
+        "searching":true,
+        "search":
+        {
+          "regex": true
+        },
+        "dataSrc":"",
+        "ajax":
+        {
+            "url": "/userlist",
+            "data":function(d)
+            {
+              d.role=role;
+              d.status=status;
+            },
+            "type": "POST",
+        },
+        "columns":
+        [
+            { "data": "email" },
+            { "data": "phone" },
+            { "data": "city" },
+            { "data": "status" },
+            { "data": "role" },
+            { "data":  "flag" }
+          ],
+          columnDefs:
+          [
+            {
+              targets:-1, // Start with the last
+              render: function ( data, type, row, meta )
+              {
+                if(row.flag=='1')
+                data = '<button style="background-color:blue;color:#fff" onclick="update(event.target.parentNode.parentNode)" >U</button>&nbsp;&nbsp;&nbsp;<button id="delbtn" class="btn btn-warning btn-sm activebtn actionbtns" onclick=\'dele('+JSON.stringify(row)+')\' data-toggle="modal" data-target="#delete"><span id="delspan" class="fa fa-times-circle"></span></button>&nbsp;&nbsp;&nbsp;<button style="background-color:#000;color:#fff;"onclick="sendmail(event.target.parentNode.parentNode)">M</button>'
+                else if(row.flag=='0')
+                data = '<button style="background-color:blue;color:#fff" onclick="update(event.target.parentNode.parentNode)" >U</button>&nbsp;&nbsp;&nbsp;<button id="delbtn" class="btn btn-success btn-sm activebtn actionbtns" onclick=\'dele('+JSON.stringify(row)+')\' data-toggle="modal" data-target="#delete"><span id="delspan" class="fa fa-check-circle"></span></button>&nbsp;&nbsp;&nbsp;<button style="background-color:#000;color:#fff;" onclick="sendmail(event.target.parentNode.parentNode)">M</button>'
+                count++;
+                //$("<p />", { text: "flag" }).appendTo("#contentl1");
+                return data;
+              }
+            }
+          ]
+        });
+      });
+    }
+    /********refresh function*****/
+    function refresh()
+    {
+      $('#example').DataTable().ajax.reload(null, false);
+    }
+    /*var table = $('#example').DataTable();
+    $('#search').on( 'keyup', function () {
+    table.clear();
+    table.search( this.value ).draw();
+  });*/
+  /********filtering*****/
+  function abc()
+  {
+     var role=document.getElementById("role");
+     var status=document.getElementById("status");
+     var table=$('#example').DataTable();
+     table.clear().draw();
+     table.destroy();
+     print(role.value,status.value);
+   }
+   var modalu = document.getElementById('update');
+   window.onclick = function(event)
+   {
+     if (event.target == modalu)
+     {
+       modalu.style.display = "none";
+     }
+   }
+   <%include partials/viewscript%>
+ </script>
+</html>

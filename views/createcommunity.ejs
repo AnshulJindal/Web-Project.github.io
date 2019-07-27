@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<style type="text/css">
+<%include partials/view %>
+  header{
+    height: 80px;
+    background-color: white;
+    padding: 10px
+  }
+  @media(max-width: 800px){
+    .mobile-responsive{
+      display: none;
+      }
+  }
+  </style>
+</head>
+<body>
+<% include partials/communityhead %>
+<div id="page-content-wrapper" style="padding:0;margin-top:60px">
+  <div class="container-fluid page-content-div" style="padding:0">
+    <div class="row">
+      <div class="col-lg-12 scoll-possible" style="padding:0">
+        <div class="community-header-top" style="height:50px;padding-top:6px;margin-left:115">
+          <div class="col-sm-12 community-sub-head">
+            <a class="btn community-head-btn active" href="/community">
+              <i class="fa fa-users"></i>
+            </a>
+            <a class="btn community-head-btn" style="margin-left:10px" href="/commcommsearchpage">
+              <i class="fa fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="align-center-all">
+          <div class="container">
+            <div class="form-horizontal col-sm-3 col-md-3 col-lg-3"></div>
+            <div class="form-horizontal col-sm-6 col-md-6 col-lg-6">
+              <h3 class="page-header" style="color:#707070">Create Community</h3>
+              <form action="/createcomm" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <input class="form-control" type="text" required="" name="communityName" placeholder="Name" maxlength="70">
+                </div>
+                <div class="form-group">
+                  <label style="color:#707070">Description</label>
+                  <input class="form-control" type="text" required="" name="communityDescription">
+                </div>
+                <div class="form-group ">
+                  <label style="color:#707070">Rule :</label>
+                  <input class="radio radio-inline" type="radio" checked="" value="D" name="rule"> Direct
+                  <input class="radio radio-inline" type="radio" value="P" name="rule"> Permission
+                </div>
+                <div class="form-group" style="display:none;">
+                  <input class="form-control" id="file" name="communityImage" type="file">
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-4 col-sm-3">
+                    <input type="file" id="profileUpload" name="profilePhoto">
+                  </div>
+                </div>
+                <div class="form-group" style="display:none">
+                  <div class="col-xs-1 col-sm-1">
+                    <input type="checkbox" class="checkbox-custom" style="outline: none;" id="check" onchange="appendData()">
+                  </div>
+                  <div class="col-xs-8 col-sm-9" style="font-weight:bold;margin-top:5px;color:#707070">Local Community</div>
+                </div>
+                <div class="form-group" id="dynamic"></div>
+                <div class="form-group">
+                  <input class="form-control btn btn-primary" type="submit" value="Create Community">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+/*function creator()
+{
+  document.getElementById("changeProfilePicBtn").click();
+  var cn=document.getElementById("cn");
+  var cd=document.getElementById("cd");
+  var rule=document.getElementById("rule");
+  var addcom=new XMLHttpRequest();
+  addcomm.addEventListener('load',function(req,res)
+  {
+
+  });
+  addcomm.open('POST','/createcomm');
+  addcomm.setRequestHeader('Content-Type','application/json');
+  addcomm.send(JSON.stringify({'name':cn.value,'location':"not added",'desc':cd.value,'rule':rule.value}));
+}*/
+<% include partials/viewscript %>
+</script>
+</html>

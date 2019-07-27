@@ -1,0 +1,176 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <style>
+  .d1{
+    top:0;
+    background-color: #222D3C;
+    position:fixed;
+    height: 60px;
+    width: 100%;
+    padding: 0px 15px;
+    z-index:1;
+    padding-top: 15px;
+  }
+  .d1 a{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 60px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .d1 span{
+    color: white;
+  }
+  .d1 img{
+    cursor: pointer;
+    width: 40px;
+    margin-left: 30px;
+    margin-right: 10px;
+    float: right;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+  <div id="div1" class="d1">
+    <a href="#">CQ</a>
+    <span style="cursor:pointer;font-size: 20px;" class="glyphicon glyphicon-log-out" id="cancelbtn"></span>
+    <img src="<%= typeof file != 'undefined' ? file : '' %>" style="height: 40px;display: block" id="image">
+  </div>
+  <div id="page-content-wrapper" style="padding:0;margin-top:60px"> <!--Margin Top is new-->
+    <div class="container-fluid page-content-div" style="padding:0">
+      <div class="row">
+        <div class="col-lg-12 scoll-possible" style="padding:0">
+          <div class="container">
+            <div style="margin-top:30px;">
+              <div class="col-12">
+                <div class="card allSidesSoft">
+                  <div class="card-body">
+                    <%= typeof msg != 'undefined' ? msg : '' %>
+                    <div class="d-flex">
+                      <form class="image-container" method="post" action="/upload" enctype="multipart/form-data" id="profilepicform">
+                        <img src="<%= typeof file != 'undefined' ? file : '' %>" id="user-profile-image" style="width: 150px; height: 150px" class="img-thumbnail allSidesSoft">
+                        <div class="middle">
+                          <input type="file" id="profileUpload" name="profilePhoto">
+                          <input type="submit" class="btn btn-default btn-sm" id="changeProfilePicBtn">
+                        </div>
+                      </form>
+                    </div>
+                    <br>
+                    <form>
+                      <div class="panel-group">
+               <!--Form panel-->
+               <div class="panel panel-default editUserPanel">
+                 <div class="panel-heading">Basic Info</div>
+                 <div class="panel-body">
+                   <div class="form-group">
+                     <label>Email :</label>
+                     <input type="text" value="" class="form-control" name="username" disabled="true" id="useremail" readonly="">
+                   </div>
+                   <div class="form-group">
+                     <label>Name :</label>
+                     <input type="text" value="" class="form-control" name="fullname" autocomplete="off" required="" id="name">
+                   </div>
+                   <div class="form-group col-sm-5" style="padding:0">
+                     <label>DOB :</label>
+                     <input class="form-control dobDate" id="date" value="" name="dob" placeholder=" Not Updated" type="text" autocomplete="off" required="">
+                   </div>
+                   <div class="form-group col-sm-5 col-sm-push-2" style="padding:0">
+                     <label>Gender :</label>
+                     <select name="gender" class="form-control" id="gender">
+                       <optgroup label="Select Gender">
+                         <option value="male">Male</option>
+                         <option value="female">Female</option>
+                         <option value="transgender">Transgender</option>
+                       </optgroup>
+                     </select>
+                   </div>
+                 </div>
+               </div>
+               <div class="panel panel-default editUserPanel">
+                 <div class="panel-heading">Contact Info</div>
+                 <div class="panel-body">
+                   <div class="form-group">
+                     <label>Phone :</label>
+                     <input type="text" value="" class="form-control" name="phone" maxlength="10" required="" id="phoneno">
+                   </div>
+                   <div class="form-group">
+                     <label>City :</label>
+                     <input type="text" value="" class="form-control" name="city" required="" id="city">
+                   </div>
+                 </div>
+               </div>
+               <div class="form-group">
+                 <a href="/Profile" class="btn btn-danger pull-right btnEditForm" style="margin:1px" id="cancelbtn">Cancel</a>
+                 <input type="submit" class="btn btn-primary pull-right btnEditForm" style="margin:1px" value="Update" id="updatebtn">
+               </div>
+             </div>
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+</div>
+</div>
+</body>
+<script>
+var useremail=document.getElementById("useremail");
+var phoneno=document.getElementById("phoneno");
+var city=document.getElementById("city");
+var gender=document.getElementById("gender");
+var nameofuser=document.getElementById("name");
+var date=document.getElementById("date");
+var updatebtn=document.getElementById("updatebtn");
+var image=document.getElementById("image");
+var imag=document.getElementById("user-profile-image")
+var req=new XMLHttpRequest();
+req.addEventListener('load', function()
+{
+	var data=JSON.parse(req.response);
+  useremail.value=data[0].email;
+  phoneno.value=data[0].phone;
+  city.value=data[0].city;
+  gender.value=data[0].gender;
+  nameofuser.value=data[0].name;
+  date.value=data[0].dob;
+	image.setAttribute("src",data[0].path);
+  imag.setAttribute("src",data[0].path);
+});
+req.open("GET", "/getuser");
+req.setRequestHeader('Content-Type','application/json');
+req.send();
+updatebtn.onclick=function()
+{
+  var update=new XMLHttpRequest();
+  update.addEventListener('load',function()
+  {
+    var data=JSON.parse(update.response);
+    if(data.role=="user")
+    window.location='/userhomepage'
+    else if(data.role=="admin")
+    window.location='/homepage'
+    else if(data.role=="commuity manager")
+    window.location='/commhomepage'
+  });
+  update.open("POST","/updatefromfirstlogin");
+  update.setRequestHeader('Content-Type','application/json');
+  update.send(JSON.stringify({'phone':phoneno.value,'city':city.value,'gender':gender.value,'name':nameofuser.value,'dob':date.value}));
+
+}
+</script>
+</html>
