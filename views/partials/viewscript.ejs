@@ -1,0 +1,20 @@
+function funcNav()
+{
+	var div2=document.getElementById('div2');
+	if(div2.style.width=="250px")
+		div2.style.width="50px";
+	else
+		div2.style.width="250px";
+}
+var nameofp=document.getElementById("nameofp");
+var image=document.getElementById("image");
+var re=new XMLHttpRequest();
+re.addEventListener('load', function()
+{
+	var data=JSON.parse(re.response);
+	nameofp.innerHTML=data[0].name;
+	image.setAttribute("src",data[0].path);
+});
+re.open("GET", "/getuser");
+re.setRequestHeader('Content-Type','application/json');
+re.send();
